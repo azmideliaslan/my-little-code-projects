@@ -1,0 +1,80 @@
+<h3 id="counter-heading" style="text-align: center;">
+    More than <span class="counter" data-count="3000">0</span> Our Customers Trust Us!
+</h3>
+
+<script>
+    //if your page is not scrolling use this code
+    var counters = document.querySelectorAll('.counter');
+    var speed = 40; // The lower the slower
+
+    counters.forEach(counter => {
+        var updateCount = () => {
+            var target = +counter.getAttribute('data-count');
+            var count = +counter.innerText;
+
+            // Lower inc to slow and higher to fast
+            var inc = target / speed;
+
+            // console.log(inc);
+            // console.log(count);
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 1);
+            } else {
+                count.innerText = target;
+            }
+        };
+
+        updateCount();
+    });
+    /*
+    
+    //if your page is scrolling use this code
+    
+    var counters = document.querySelectorAll('.counter');
+    var speed = 40; // The lower the slower
+
+    function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function startCountIfVisible() {
+        counters.forEach(counter => {
+            if (isElementInViewport(counter)) {
+                var updateCount = () => {
+                    var target = +counter.getAttribute('data-count');
+                    var count = +counter.innerText;
+
+                    // Lower inc to slow and higher to fast
+                    var inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            }
+        });
+    }
+
+    var counterHeading = document.getElementById('counter-heading');
+
+    window.addEventListener('scroll', function() {
+        if (isElementInViewport(counterHeading)) {
+            startCountIfVisible();
+            window.removeEventListener('scroll', arguments.callee);
+        }
+    });
+    
+    */
+</script>
